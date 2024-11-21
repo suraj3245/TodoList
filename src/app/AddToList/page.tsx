@@ -15,6 +15,7 @@ const AddToList = () => {
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputval(event.target.value);
     };
+
     const handleAddToList = () => {
         console.log(inputVal);
         setDataList([...dataList, inputVal]);
@@ -27,6 +28,10 @@ const AddToList = () => {
         localStorage.setItem('localData', JSON.stringify(dataList));
     }, [dataList]);
 
+    function delItems(itm: number){
+       console.log(itm,'adf');
+       setDataList(dataList.splice(1, 0));
+    }
 
     return (
         <>
@@ -35,7 +40,7 @@ const AddToList = () => {
                 <input type="text" value={inputVal} onChange={handleInputChange} placeholder="Enter the Task"/>&nbsp;<button className="btn btn-primary" onClick={handleAddToList}>AddTolist</button>
                 <ul>
                         {dataList.map((item, index) => (
-                            <li key={index}>{item} &nbsp;<button className="btn btn-primary">Edit</button>&nbsp;<button className="btn btn-danger">Delete</button></li>
+                            <li key={index}>{item} &nbsp;<button className="btn btn-primary">Edit</button>&nbsp;<button className="btn btn-danger" onClick={()=> delItems(index)}>Delete</button></li>
                         ))}
                     </ul>
             </div>
